@@ -6,7 +6,7 @@ To identify the most in-demand skills for popular non-Senior level data-related 
 
 To view my notebook with detailed steps, click here: [2_Skills_Demand.ipynb](Python_Data_Project/3_Project/2_Skills_Demand.ipynb)
 
-### Data Visualization
+### Data Visualization and Results
 
 ```python
 fig, ax = plt.subplots(len(job_titles), 1, figsize=(15, 20))
@@ -29,7 +29,7 @@ plt.suptitle('Likelihood of Top Skills for Non-Senior Data Job Titles', fontsize
 plt.tight_layout(rect=[0, 0, 1, 0.98])
 plt.show()
 ```
-### Results
+
 ![Visualization of Likelihood of Top Skills for Data Roles](Python_Data_Project/Images/data_skills_percent.png)
 *Bar graphs showing the percentages of top 5 skills for the top most common data roles in the US*
 
@@ -81,6 +81,7 @@ To identify trends in data-specific roles, I analyzed the top three in-demand po
 
 To view my notebook with detailed steps, click here: [3_Skills_Trend.ipynb](Python_Data_Project/3_Project/3_Skills_Trend.ipynb)
 
+### Data Visualization and Results
 ```python
 df_plot = df_DA_US_perc.iloc[:, :5]
 sns.lineplot(data=df_plot, dashes=False, palette='tab10')
@@ -97,7 +98,7 @@ from matplotlib.ticker import PercentFormatter
 ax = plt.gca()
 ax.yaxis.set_major_formatter(PercentFormatter(decimals=0))
 ```
-### Results
+
 ![Visualization of Probability of Skills Trending Over Time in 2023](Python_Data_Project/Images/skills_trend_percent.png)
 *Line graph showing overall the probability of each of the top skills appearing in job posts on month-to-month basis*
 
@@ -130,26 +131,67 @@ ax.yaxis.set_major_formatter(PercentFormatter(decimals=0))
 
 This chart highlights the importance of focusing on SQL and Python for robust career stability, while also acquiring skills in R, Tableau, and Excel to enhance job prospects and adaptability.
 
+### Data Visualization and Results cont'd
 ```python
-df_plot = df_DA_US_perc.iloc[:, :5]
-
 # Create subplots
-fig, axes = plt.subplots(len(job_titles), 1, figsize=(10, len(job_titles) * 5))
+fig, axes = plt.subplots(nrows=len(job_titles), figsize=(7, 15))
 
-# Plot each job title in its respective subplot
 for i, title in enumerate(job_titles):
-    sns.lineplot(data=df_plot, ax=axes[i], dashes=False)
-    sns.set_style('ticks')
-    axes[i].set_title(f'Probability of {title} Skills Over Time in the US')
-    axes[i].set_xlabel('2023')
-    axes[i].set_ylabel('Probability of Job Skill (%)')
-    axes[i].legend(loc='center left', bbox_to_anchor=(1, 0.5))
-    axes[i].yaxis.set_major_formatter(PercentFormatter(decimals=0))
+	ax = axes[i]
+	
+	# Filter the DataFrame for the current job title and country
+	df_filtered = df_concat[(df_concat['job_title_short'] == title) & (df_concat['job_country'] == 'United States')].copy()
+	
+	# Extract the month number from the job posted date
+	df_filtered['job_posted_month_no'] = df_filtered['job_posted_date'].dt.month
+	
+	# Explode the job skills column
+	df_filtered = df_filtered.explode('job_skills')
+	
+	# Create a pivot table
+	df_pivot = df_filtered.pivot_table(index='job_posted_month_no', columns='job_skills', aggfunc='size', fill_value=0)
+	
+	# Calculate the total counts for each skill
+	df_pivot.loc['Total'] = df_pivot.sum()
+	
+	# Sort the pivot table by the total counts
+	df_pivot = df_pivot[df_pivot.loc['Total'].sort_values(ascending=False).index]
+	
+	# Drop the total row
+	df_pivot = df_pivot.drop('Total')
+	
+	# Calculate the total counts for each month
+	df_totals = df_filtered.groupby('job_posted_month_no').size()
+	
+	# Calculate the percentage for each skill
+	df_perc = df_pivot.div(df_totals / 100, axis=0)
+	
+	# Reset the index
+	df_perc = df_perc.reset_index()
+	
+	# Format the month numbers to month names
+	df_perc['job_posted_month_no'] = df_perc['job_posted_month_no'].apply(lambda x: pd.to_datetime(str(x), format='%m').strftime('%b'))
+	
+	# Set the index to the month names
+	df_perc = df_perc.set_index('job_posted_month_no')
+	
+	# Select the top 5 skills
+	df_plot = df_perc.iloc[:, :5]
+	
+	# Plot the data
+	sns.lineplot(data=df_plot, dashes=False, palette='tab10', ax=ax)
+	sns.set_style('ticks')
+	ax.set_title(f'Probability of Data Skills Over Time in the US ({title})')
+	ax.set_xlabel('2023')
+	ax.set_ylabel('Probability of Job Skill (%)')
+	ax.set_ylim(0, 16)
+	ax.legend(loc='center left', bbox_to_anchor=(1, 0.5))
+	ax.yaxis.set_major_formatter(PercentFormatter(decimals=0))
 
 plt.tight_layout()
 plt.show()
 ```
-### Results cont'd
+
 ![Visulization of Each Role's Highest In-Demand Skills Listed Over Time](Python_Data_Project/Images/skills_trend_extended.png)
 *Seperate line graphs of each of the top Data Jobs showing the probabilities of the top 5 skills appearing in job posts month by month*
 
@@ -157,33 +199,33 @@ plt.show()
 
 #### Data Analyst
 - **Core Skills**:
-  - **SQL**: Most demanded skill, consistently around 30%, essential for data querying and management.
-  - **Excel**: High demand, around 25%, crucial for data manipulation and analysis.
-  - **Python**: Consistent demand around 15%, important for data analysis and automation.
+  - **SQL**: Consistently the most demanded skill, around 14%, essential for data querying and management.
+  - **Excel**: Steady demand, around 12%, crucial for data manipulation and analysis.
+  - **Python**: Stable demand around 8%, important for data analysis and automation.
 
 - **Supplementary Skills**:
-  - **Tableau**: Around 20%, vital for data visualization and reporting.
-  - **SAS**: Around 10%, used for statistical analysis and data manipulation.
+  - **Tableau**: Around 7%, vital for data visualization and reporting.
+  - **SAS**: Around 6%, used for statistical analysis and data manipulation.
 
 #### Data Scientist
 - **Core Skills**:
-  - **Python**: Most demanded skill, around 35%, essential for data analysis, machine learning, and statistical modeling.
-  - **SQL**: High demand, around 30%, important for data querying and manipulation.
-  - **R**: Around 20%, critical for statistical analysis and data visualization.
+  - **Python**: Most demanded skill, around 14%, essential for data analysis, machine learning, and statistical modeling.
+  - **SQL**: Steady demand, around 12%, important for data querying and manipulation.
+  - **R**: Around 8%, critical for statistical analysis and data visualization.
 
 - **Supplementary Skills**:
-  - **SAS**: Around 15%, used for advanced statistical analysis.
-  - **Tableau**: Around 10%, valuable for data visualization.
+  - **SAS**: Around 5%, used for advanced statistical analysis.
+  - **Tableau**: Around 5%, valuable for data visualization.
 
 #### Data Engineer
 - **Core Skills**:
-  - **SQL**: Consistently the most demanded skill, around 30%, essential for database management and ETL processes.
-  - **Python**: Steady demand, around 25%, important for scripting and automation.
-  - **AWS**: Consistent demand around 20%, crucial for cloud-based data solutions.
+  - **SQL**: Consistently the most demanded skill, around 10%, essential for database management and ETL processes.
+  - **Python**: Steady demand, around 8%, important for scripting and automation.
+  - **AWS**: Consistent demand around 6%, crucial for cloud-based data solutions.
 
 - **Supplementary Skills**:
-  - **Azure**: Around 15%, used for cloud services and data solutions.
-  - **Spark**: Around 10%, important for big data processing.
+  - **Azure**: Around 5%, used for cloud services and data solutions.
+  - **Spark**: Around 4%, important for big data processing.
 
 ### Shared Skills Across Roles
 - **SQL**: Dominates across all three roles, essential for data querying, management, and manipulation.
