@@ -151,33 +151,48 @@ plt.show()
 ```
 ### Results cont'd
 ![Visulization of Each Role's Highest In-Demand Skills Listed Over Time](Python_Data_Project/Images/skills_trend_extended.png)
-*Seperate line graphs of each of the top Data Jobs showing overall the probability of each of the top skills appearing in job posts month by month*
+*Seperate line graphs of each of the top Data Jobs showing the probabilities of the top 5 skills appearing in job posts month by month*
 
 ### Insights
 
-1. **SQL Dominance Across Roles**:
-   - **Consistent High Demand**: SQL maintains a high probability of job skill requirement, around 55%, for Data Analyst, Data Scientist, and Data Engineer roles.
-   - **Key Insight**: SQL is a fundamental skill across all three roles, highlighting its critical importance in the data industry.
+#### Data Analyst
+- **Core Skills**:
+  - **SQL**: Most demanded skill, consistently around 30%, essential for data querying and management.
+  - **Excel**: High demand, around 25%, crucial for data manipulation and analysis.
+  - **Python**: Consistent demand around 15%, important for data analysis and automation.
 
-2. **Python's Steady Importance**:
-   - **High Consistency**: Python shows a stable demand, with a probability of around 50%, across Data Analyst, Data Scientist, and Data Engineer positions.
-   - **Key Insight**: Python is essential for these roles, emphasizing its importance for data-related tasks and analyses.
+- **Supplementary Skills**:
+  - **Tableau**: Around 20%, vital for data visualization and reporting.
+  - **SAS**: Around 10%, used for statistical analysis and data manipulation.
 
-3. **R's Targeted Demand**:
-   - **Moderate Consistency**: R's demand is steady, with probabilities fluctuating around 25-30%, particularly peaking in late summer for Data Analyst and Data Scientist roles.
-   - **Key Insight**: R remains a valuable skill for statistical analysis, especially in Data Scientist positions.
+#### Data Scientist
+- **Core Skills**:
+  - **Python**: Most demanded skill, around 35%, essential for data analysis, machine learning, and statistical modeling.
+  - **SQL**: High demand, around 30%, important for data querying and manipulation.
+  - **R**: Around 20%, critical for statistical analysis and data visualization.
 
-4. **Tableau's Steady Role**:
-   - **Slight Fluctuations**: Tableau's demand is relatively stable, with probabilities around 20%, across all three roles.
-   - **Key Insight**: Tableau is important for data visualization tasks, although its demand is less compared to SQL and Python.
+- **Supplementary Skills**:
+  - **SAS**: Around 15%, used for advanced statistical analysis.
+  - **Tableau**: Around 10%, valuable for data visualization.
 
-5. **Excel's Consistency**:
-   - **Low but Steady Demand**: Excel maintains a consistent probability of around 20% for all three roles.
-   - **Key Insight**: Excel is a basic yet essential tool for data manipulation and reporting, remaining relevant across these positions.
+#### Data Engineer
+- **Core Skills**:
+  - **SQL**: Consistently the most demanded skill, around 30%, essential for database management and ETL processes.
+  - **Python**: Steady demand, around 25%, important for scripting and automation.
+  - **AWS**: Consistent demand around 20%, crucial for cloud-based data solutions.
+
+- **Supplementary Skills**:
+  - **Azure**: Around 15%, used for cloud services and data solutions.
+  - **Spark**: Around 10%, important for big data processing.
+
+### Shared Skills Across Roles
+- **SQL**: Dominates across all three roles, essential for data querying, management, and manipulation.
+- **Python**: High demand in all roles, crucial for programming, data analysis, and automation.
+
+### Role-Specific Highlights
+- **Data Analysts**: Excel and Tableau are particularly important for data manipulation and visualization.
+- **Data Scientists**: R and SAS are significant for statistical analysis and advanced data modeling.
+- **Data Engineers**: AWS, Azure, and Spark are key for cloud computing and big data processing.
 
 ### Summary
-- **Core Skills**: SQL and Python are crucial across Data Analyst, Data Scientist, and Data Engineer roles, providing a stable foundation for career security and adaptability.
-- **Supplementary Skills**: R, Tableau, and Excel are valuable additions, enhancing capabilities in specific areas like statistical analysis and data visualization.
-- **Stability**: The demand for these skills shows overall stability throughout the year, suggesting reliable job security for professionals proficient in these areas.
-
-By focusing on mastering SQL and Python, while also gaining proficiency in R, Tableau, and Excel, individuals can ensure robust career stability and versatility in the data industry.
+Focusing on mastering SQL and Python provides a robust foundation for career stability and adaptability across Data Analyst, Data Scientist, and Data Engineer roles. Additionally, gaining proficiency in role-specific skills enhances job prospects and versatility in the dynamic field of data science and engineering.
