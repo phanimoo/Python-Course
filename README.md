@@ -1,7 +1,7 @@
 # The Analysis
 ## What are the most demanded skills for the top non-Senior level data roles in the US?
 
-To identify the most in-demand skills for popular non-Senior level data roles, I filtered out the most popular positions and determined the top 5 skills for each. This analysis highlights the key job titles and their essential skills, helping me focus on the relevant skills for my targeted role.
+To identify the most in-demand skills for popular non-Senior level data-related roles, I filtered out the most popular positions and determined the top 5 skills for each. This analysis highlights the key job titles and their essential skills, helping me focus on the relevant skills for my targeted role.
 
 
 To view my notebook with detailed steps, click here: [2_Skills_Demand.ipynb](Python_Data_Project/3_Project/2_Skills_Demand.ipynb)
@@ -71,4 +71,113 @@ plt.show()
   - **Technical and Engineering Roles**: Focus on AWS, Azure, Spark, and specific programming frameworks like TensorFlow and PyTorch.
 - **Visualization Tools**: Tableau is essential for roles that require data presentation.
 
-By focusing on these common and role-specific skills, individuals can better prepare for various non-senior level data job titles.
+By mastering these common and role-specific skills, individuals can enhance their job security and versatility in the job market. The overlap of critical skills like SQL and Python across multiple roles ensures that professionals remain competitive and adaptable, while proficiency in specialized tools like Excel, Tableau, and AWS can provide an edge in specific positions. This comprehensive skill set not only prepares individuals for a variety of data job titles but also offers greater stability and growth opportunities in their careers.
+
+---
+
+## How are in-demand skills trending for Top 3 Data-Related Jobs?
+
+To identify trends in data-specific roles, I analyzed the top three in-demand positions and pinpointed the top five skills for each. I then plotted the monthly percentage of job listings requiring these skills. This analysis highlights the consistency of these top skills across the industry, underscoring their importance for robust career stability and adaptability in various roles.
+
+To view my notebook with detailed steps, click here: [3_Skills_Trend.ipynb](Python_Data_Project/3_Project/3_Skills_Trend.ipynb)
+
+```python
+df_plot = df_DA_US_perc.iloc[:, :5]
+sns.lineplot(data=df_plot, dashes=False, palette='tab10')
+sns.set_style('ticks')
+plt.title('Probability of Data Skills Over Time in the US (Data Analyst, Data Scientist, Data Engineer)')
+plt.xlabel('2023')
+plt.ylabel('Probability of Job Skill (%)')
+
+# Fixing the legend
+plt.legend(loc='center left', bbox_to_anchor=(1, 0.5))
+
+# Adding percentage to y-axis
+from matplotlib.ticker import PercentFormatter
+ax = plt.gca()
+ax.yaxis.set_major_formatter(PercentFormatter(decimals=0))
+```
+### Results
+![Visualization of Probability of Skills Trending Over Time in 2023](Python_Data_Project/Images/skills_trend_percent.png)
+*Line graph showing overall the probability of each of the top skills appearing in job posts on month-to-month basis*
+
+### Insights
+
+1. **SQL Dominance**:
+   - **Consistent High Demand**: SQL remains the most demanded skill throughout the year, maintaining a probability around 55%.
+   - **Key Insight**: SQL is a stable and essential skill for data roles such as Data Analyst, Data Scientist, and Data Engineer.
+
+2. **Python Popularity**:
+   - **Sustained High Demand**: Python consistently shows a high probability, around 50%, indicating its crucial role across these positions.
+   - **Key Insight**: Python is indispensable for technical data roles, emphasizing the need for proficiency in this language.
+
+3. **R Steady Presence**:
+   - **Moderate Demand**: The probability of R skills fluctuates around 25%, with a slight peak in late summer.
+   - **Key Insight**: While not as dominant as SQL or Python, R remains a valuable skill, especially for roles focusing on statistical analysis.
+
+4. **Tableau Demand Fluctuations**:
+   - **Slight Variation**: Tableau's probability remains close to 20% but shows minor fluctuations throughout the year.
+   - **Key Insight**: Tableau is important for data visualization roles, though its demand is relatively stable with some variation.
+
+5. **Excel Consistency**:
+   - **Low but Steady Demand**: Excel's probability stays consistently around 20%, indicating its steady presence in data roles.
+   - **Key Insight**: Excel continues to be a fundamental skill, particularly for data manipulation and reporting tasks.
+
+### Summary
+- **Core Skills**: SQL and Python are consistently in high demand, reinforcing their importance across various data roles.
+- **Supplementary Skills**: R, Tableau, and Excel, while not as dominant, remain valuable and contribute to a well-rounded skill set.
+- **Stability and Fluctuation**: The demand for these skills shows overall stability with minor fluctuations, suggesting steady job security for professionals proficient in these areas.
+
+This chart highlights the importance of focusing on SQL and Python for robust career stability, while also acquiring skills in R, Tableau, and Excel to enhance job prospects and adaptability.
+
+```python
+df_plot = df_DA_US_perc.iloc[:, :5]
+
+# Create subplots
+fig, axes = plt.subplots(len(job_titles), 1, figsize=(10, len(job_titles) * 5))
+
+# Plot each job title in its respective subplot
+for i, title in enumerate(job_titles):
+    sns.lineplot(data=df_plot, ax=axes[i], dashes=False)
+    sns.set_style('ticks')
+    axes[i].set_title(f'Probability of {title} Skills Over Time in the US')
+    axes[i].set_xlabel('2023')
+    axes[i].set_ylabel('Probability of Job Skill (%)')
+    axes[i].legend(loc='center left', bbox_to_anchor=(1, 0.5))
+    axes[i].yaxis.set_major_formatter(PercentFormatter(decimals=0))
+
+plt.tight_layout()
+plt.show()
+```
+### Results cont'd
+![Visulization of Each Role's Highest In-Demand Skills Listed Over Time](Python_Data_Project/Images/skills_trend_extended.png)
+*Seperate line graphs of each of the top Data Jobs showing overall the probability of each of the top skills appearing in job posts month by month*
+
+### Insights
+
+1. **SQL Dominance Across Roles**:
+   - **Consistent High Demand**: SQL maintains a high probability of job skill requirement, around 55%, for Data Analyst, Data Scientist, and Data Engineer roles.
+   - **Key Insight**: SQL is a fundamental skill across all three roles, highlighting its critical importance in the data industry.
+
+2. **Python's Steady Importance**:
+   - **High Consistency**: Python shows a stable demand, with a probability of around 50%, across Data Analyst, Data Scientist, and Data Engineer positions.
+   - **Key Insight**: Python is essential for these roles, emphasizing its importance for data-related tasks and analyses.
+
+3. **R's Targeted Demand**:
+   - **Moderate Consistency**: R's demand is steady, with probabilities fluctuating around 25-30%, particularly peaking in late summer for Data Analyst and Data Scientist roles.
+   - **Key Insight**: R remains a valuable skill for statistical analysis, especially in Data Scientist positions.
+
+4. **Tableau's Steady Role**:
+   - **Slight Fluctuations**: Tableau's demand is relatively stable, with probabilities around 20%, across all three roles.
+   - **Key Insight**: Tableau is important for data visualization tasks, although its demand is less compared to SQL and Python.
+
+5. **Excel's Consistency**:
+   - **Low but Steady Demand**: Excel maintains a consistent probability of around 20% for all three roles.
+   - **Key Insight**: Excel is a basic yet essential tool for data manipulation and reporting, remaining relevant across these positions.
+
+### Summary
+- **Core Skills**: SQL and Python are crucial across Data Analyst, Data Scientist, and Data Engineer roles, providing a stable foundation for career security and adaptability.
+- **Supplementary Skills**: R, Tableau, and Excel are valuable additions, enhancing capabilities in specific areas like statistical analysis and data visualization.
+- **Stability**: The demand for these skills shows overall stability throughout the year, suggesting reliable job security for professionals proficient in these areas.
+
+By focusing on mastering SQL and Python, while also gaining proficiency in R, Tableau, and Excel, individuals can ensure robust career stability and versatility in the data industry.
