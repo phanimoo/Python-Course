@@ -1,5 +1,5 @@
 # The Analysis
-## What are the most demanded skills for the top non-Senior level data roles in the US?
+## 1. What are the most demanded skills for the top non-Senior level data roles in the US?
 
 To identify the most in-demand skills for popular non-Senior level data-related roles, I filtered out the most popular positions and determined the top 5 skills for each. This analysis highlights the key job titles and their essential skills, helping me focus on the relevant skills for my targeted role.
 
@@ -75,7 +75,7 @@ By mastering these common and role-specific skills, individuals can enhance thei
 
 ---
 
-## How are in-demand skills trending for Top 3 Data-Related Jobs?
+## 2. How are in-demand skills trending for Top 3 Data-Related Jobs?
 
 To identify trends in data-specific roles, I analyzed the top three in-demand positions and pinpointed the top five skills for each. I then plotted the monthly percentage of job listings requiring these skills. This analysis highlights the consistency of these top skills across the industry, underscoring their importance for robust career stability and adaptability in various roles.
 
@@ -133,7 +133,6 @@ This chart highlights the importance of focusing on SQL and Python for robust ca
 
 ### Data Visualization and Results cont'd
 ```python
-# Create subplots
 fig, axes = plt.subplots(nrows=len(job_titles), figsize=(7, 15))
 
 for i, title in enumerate(job_titles):
@@ -145,19 +144,13 @@ for i, title in enumerate(job_titles):
 	# Extract the month number from the job posted date
 	df_filtered['job_posted_month_no'] = df_filtered['job_posted_date'].dt.month
 	
-	# Explode the job skills column
+    # Create a pivot table of exploded job skills
 	df_filtered = df_filtered.explode('job_skills')
-	
-	# Create a pivot table
 	df_pivot = df_filtered.pivot_table(index='job_posted_month_no', columns='job_skills', aggfunc='size', fill_value=0)
 	
-	# Calculate the total counts for each skill
+	# Calculate the total counts for each skill then sort them by the totals
 	df_pivot.loc['Total'] = df_pivot.sum()
-	
-	# Sort the pivot table by the total counts
 	df_pivot = df_pivot[df_pivot.loc['Total'].sort_values(ascending=False).index]
-	
-	# Drop the total row
 	df_pivot = df_pivot.drop('Total')
 	
 	# Calculate the total counts for each month
@@ -165,20 +158,15 @@ for i, title in enumerate(job_titles):
 	
 	# Calculate the percentage for each skill
 	df_perc = df_pivot.div(df_totals / 100, axis=0)
-	
-	# Reset the index
 	df_perc = df_perc.reset_index()
 	
-	# Format the month numbers to month names
+    # Format months
 	df_perc['job_posted_month_no'] = df_perc['job_posted_month_no'].apply(lambda x: pd.to_datetime(str(x), format='%m').strftime('%b'))
 	
-	# Set the index to the month names
+    # Get the top 5 skills
 	df_perc = df_perc.set_index('job_posted_month_no')
-	
-	# Select the top 5 skills
 	df_plot = df_perc.iloc[:, :5]
-	
-	# Plot the data
+
 	sns.lineplot(data=df_plot, dashes=False, palette='tab10', ax=ax)
 	sns.set_style('ticks')
 	ax.set_title(f'Probability of Data Skills Over Time in the US ({title})')
@@ -227,14 +215,181 @@ plt.show()
   - **Azure**: Around 5%, used for cloud services and data solutions.
   - **Spark**: Around 4%, important for big data processing.
 
-### Shared Skills Across Roles
+### Key Analysis
+#### Shared Skills Across Roles
 - **SQL**: Dominates across all three roles, essential for data querying, management, and manipulation.
 - **Python**: High demand in all roles, crucial for programming, data analysis, and automation.
 
-### Role-Specific Highlights
+#### Role-Specific Highlights
 - **Data Analysts**: Excel and Tableau are particularly important for data manipulation and visualization.
 - **Data Scientists**: R and SAS are significant for statistical analysis and advanced data modeling.
 - **Data Engineers**: AWS, Azure, and Spark are key for cloud computing and big data processing.
 
 ### Summary
 Focusing on mastering SQL and Python provides a robust foundation for career stability and adaptability across Data Analyst, Data Scientist, and Data Engineer roles. Additionally, gaining proficiency in role-specific skills enhances job prospects and versatility in the dynamic field of data science and engineering.
+
+## 3. How well do jobs and skills pay for data roles?
+
+To identify the highest-paying roles and skills, I focused on jobs in the United States and analyzed their median salaries. Initially, I examined the salary distributions for common data jobs, such as Data Scientist, Data Engineer, and Data Analyst, to understand which positions offer the highest pay.
+
+To view my notebook for more details, click here:
+[4_Salary_Analysis](Python_Data_Project/3_Project/4_Salary_Analysis.ipynb)
+
+### Data Visualization and Results
+
+```python
+sns.boxplot(data=df_US_top6, x='salary_year_avg', y='job_title_short', hue='job_title_short', palette='Set1', order=job_order)
+sns.set_style('ticks')
+plt.title('Distribution of Average Yearly Salary for Data Jobs in US')
+plt.xlabel('Average Yearly Salary (USD)')
+plt.ylabel(' ')
+plt.xlim(0, 300000)
+plt.gca().xaxis.set_major_formatter(plt.FuncFormatter(lambda x, pos: f'{int(x/1000)}k$'))
+plt.show()
+```
+![Visualization of Median Salaries for Top 6 Data Roles in the US](Python_Data_Project/Images/salary_analysis.png)
+*Boxplots visualizing the median salaries for each of the Top 6 highest in-demand data roles in the US*
+
+### Insights
+
+The chart presents the distribution of average yearly salaries for various data jobs in the US, including both senior and non-senior roles.
+
+#### Key Observations:
+
+1. **Senior Data Scientist**:
+   - **Salary Range**: The highest among all roles, with most salaries falling between approximately $125k and $190k.
+   - **Outliers**: Some salaries exceed $250k, indicating lucrative opportunities for highly experienced professionals.
+
+2. **Senior Data Engineer**:
+   - **Salary Range**: Second highest, with most salaries ranging from around $120k to $180k.
+   - **Outliers**: A few salaries go beyond $200k, suggesting high earning potential in specialized positions.
+
+3. **Data Scientist**:
+   - **Salary Range**: Generally between $90k and $150k.
+   - **Outliers**: Some salaries reach up to $200k, reflecting the value of advanced analytical skills and expertise.
+
+4. **Data Engineer**:
+   - **Salary Range**: Similar to Data Scientists, typically between $90k and $140k.
+   - **Outliers**: Some salaries approach $200k, indicating demand for skills in data infrastructure and engineering.
+
+5. **Senior Data Analyst**:
+   - **Salary Range**: Between $80k and $130k.
+   - **Outliers**: A few salaries surpass $150k, highlighting opportunities for experienced analysts in leadership roles.
+
+6. **Data Analyst**:
+   - **Salary Range**: The lowest among the roles, generally between $50k and $90k.
+   - **Outliers**: Some salaries exceed $100k, showing potential for growth and specialization.
+
+### Key Analysis:
+
+1. **Career Growth and Salary Progression**:
+   - There is a clear progression in salary from non-senior to senior roles across all job titles. 
+   - Investing in skill development and gaining experience can lead to significant salary increases.
+
+2. **Demand for Specialized Skills**:
+   - The presence of high outliers, especially in senior roles, indicates a strong demand for specialized skills and extensive experience.
+   - Continuous learning and skill enhancement in tools like SQL, Python, and cloud technologies can improve job prospects and salary potential.
+
+3. **Role Comparison**:
+   - Senior roles (Senior Data Scientist, Senior Data Engineer) command higher salaries compared to their non-senior counterparts.
+   - Among non-senior roles, Data Scientists and Data Engineers tend to earn more than Data Analysts, reflecting the complexity and technical requirements of these positions.
+
+4. **Advancing from Data Analyst to Data Engineer or Data Scientist**:
+   - Data Analysts looking to significantly increase their earning potential might benefit from transitioning to Data Engineer or Data Scientist roles rather than advancing to Senior Data Analyst.
+   - The salary range for Data Engineers and Data Scientists is higher, with greater upward mobility into senior positions.
+   - Acquiring additional skills in programming, machine learning, and data engineering can facilitate this transition and lead to more lucrative career opportunities.
+
+5. **Market Value of Data Roles**:
+   - The data highlights the lucrative nature of data-related careers, particularly as one advances to senior positions.
+   - Staying updated with industry trends and in-demand skills is crucial for career advancement and maximizing earning potential.
+
+### Summary
+
+Understanding the salary distribution and the factors influencing it can guide professionals in making informed career decisions. For Data Analysts, focusing on acquiring key skills and gaining experience in data science or data engineering can significantly enhance career stability and progression. This strategic move can lead to higher salaries and more robust career opportunities in the competitive field of data science and engineering.
+
+### Data Visualizaitiona and Results cont'd:
+```python
+fig, ax = plt.subplots(2, 1)  
+
+sns.set_theme(style='ticks')
+
+# Top 10 Highest Paid Skills for Data Analysts
+sns.barplot(data=df_data_top_pay, x='median', y=df_data_top_pay.index, hue='median', ax=ax[0], palette='dark:b_r')
+ax[0].legend().remove()
+# original code:
+# df_data_top_pay[::-1].plot(kind='barh', y='median', ax=ax[0], legend=False) 
+ax[0].set_title('Top 10 Highest Paid Skills for Entry Level Data Roles')
+ax[0].set_ylabel('')
+ax[0].set_xlabel('')
+ax[0].xaxis.set_major_formatter(plt.FuncFormatter(lambda x, _: f'${int(x/1000)}K'))
+
+
+# Top 10 Most In-Demand Skills for Data Analystsr')
+sns.barplot(data=df_data_top_count, x='median', y=df_data_top_count.index, hue='median', ax=ax[1], palette='light:b')
+ax[1].legend().remove()
+# original code:
+# df_data_top_count[::-1].plot(kind='barh', y='median', ax=ax[1], legend=False)
+ax[1].set_title('Top 10 Most In-Demand Skills for Entry Level Data Roles')
+ax[1].set_ylabel('')
+ax[1].set_xlabel('Median Salary (USD)')
+ax[1].set_xlim(ax[0].get_xlim())  # Set the same x-axis limits as the first plot
+ax[1].xaxis.set_major_formatter(plt.FuncFormatter(lambda x, _: f'${int(x/1000)}K'))
+
+plt.tight_layout()
+plt.show()
+```
+
+![Visualization of Skills with the Highest Median Salaries And Highest Demand](Python_Data_Project/Images/skills_demand_salary.png)
+*Bar charts showing the top highest paid technical skills (top) as well as the top most requested skills in job postings (bottom) in the US across Data Analysts, Data Scientists and Data Engineers*
+
+### Insights
+
+#### Key Observations:
+
+**Top 10 Highest Paid Skills for Entry-Level Data Roles:**
+
+1. **MongoDB**: Highest median salary, approaching $200K.
+2. **Unreal Engine**: Strong demand, with salaries around $175K.
+3. **Ruby on Rails**: High median salary, indicating robust demand for web development skills.
+4. **Solidity**: Reflects the lucrative blockchain technology market.
+5. **Elixir**: High earnings potential, especially in back-end development.
+6. **Hugging Face**: Significant salary, highlighting demand for natural language processing expertise.
+7. **dplyr**: Indicates valuable data manipulation skills within the R programming language.
+8. **Objective-C**: Still relevant and high-paying in mobile app development.
+9. **Theano**: Reflects demand for expertise in deep learning frameworks.
+10. **Atlassian**: High salary potential, suggesting value in project management and software development tools.
+
+**Top 10 Most In-Demand Skills for Entry-Level Data Roles:**
+
+1. **Apache Spark**: Highly sought after for big data processing.
+2. **AWS (Amazon Web Services)**: Crucial for cloud computing and infrastructure.
+3. **Python**: Essential for a wide range of data tasks and highly demanded.
+4. **Azure**: Reflects the importance of Microsoft’s cloud platform.
+5. **R**: Valuable for statistical analysis and data science.
+6. **SQL**: Fundamental skill for data management and manipulation.
+7. **Tableau**: Important for data visualization and business intelligence.
+8. **SAS**: Indicates demand in industries relying on advanced analytics.
+9. **Power BI**: Popular for business analytics and data visualization.
+10. **Excel**: Still relevant and widely used for data analysis.
+
+### Key Analysis:
+
+1. **Salary vs. Demand**:
+   - While some skills like MongoDB and Unreal Engine offer the highest median salaries, they are not listed among the most in-demand skills.
+   - Skills like Python, AWS, and SQL, which appear on the most in-demand list, also offer competitive salaries, reflecting their broad utility across various roles.
+
+2. **Strategic Skill Development**:
+   - **High-Paying Skills**: Focusing on acquiring high-paying skills like MongoDB, Unreal Engine, and Ruby on Rails can significantly boost earning potential.
+   - **In-Demand Skills**: Acquiring in-demand skills like Python, AWS, and Spark ensures robust job opportunities and career stability.
+
+3. **Skill Overlap and Career Advancement**:
+   - **For Data Analysts**: Enhancing skills in SQL, Tableau, and Excel, which are already relevant, can ease the transition to Data Engineer or Data Scientist roles.
+   - **For Career Growth**: Learning high-paying skills like MongoDB and Solidity can open up advanced opportunities and lead to higher salaries.
+
+4. **Industry Trends**:
+   - The data indicates a growing demand for cloud computing skills (AWS, Azure), big data processing (Spark), and machine learning frameworks (Hugging Face, Theano).
+   - Skills in traditional statistical tools (R, SAS) and data visualization (Tableau, Power BI) remain critical for data-driven decision-making roles.
+
+### Summary:
+
+For entry-level data professionals, a strategic blend of in-demand and high-paying skills can pave the way for robust career growth and lucrative opportunities. Balancing foundational skills like Python, SQL, and Excel with specialized expertise in areas like cloud computing, big data, and blockchain technology can provide a competitive edge in the dynamic job market. This approach not only ensures job security but also offers the potential for substantial salary advancements as professionals transition into more advanced data roles.
