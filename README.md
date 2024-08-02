@@ -168,23 +168,23 @@ for i, title in enumerate(job_titles):
 	ax = axes[i]
 	
 	# Filter the DataFrame for the current job title and country
-	df_filtered = df_concat[(df_concat['job_title_short'] == title) & (df_concat['job_country'] == 'United States')].copy()
+	df_filtered = df[(df['job_title_short'] == title) & (df['job_country'] == 'United States')].copy()
 	
 	# Extract the month number from the job posted date
 	df_filtered['job_posted_month_no'] = df_filtered['job_posted_date'].dt.month
 	
     # Create a pivot table of exploded job skills
-	df_filtered = df_filtered.explode('job_skills')
-	df_pivot = df_filtered.pivot_table(index='job_posted_month_no', columns='job_skills', aggfunc='size', fill_value=0)
-	
+	df_filtered_explode = df_filtered.explode('job_skills')
+	df_pivot = df_filtered_explode.pivot_table(index='job_posted_month_no', columns='job_skills', aggfunc='size', fill_value=0)
+
 	# Calculate the total counts for each skill then sort them by the totals
 	df_pivot.loc['Total'] = df_pivot.sum()
 	df_pivot = df_pivot[df_pivot.loc['Total'].sort_values(ascending=False).index]
 	df_pivot = df_pivot.drop('Total')
-	
+
 	# Calculate the total counts for each month
 	df_totals = df_filtered.groupby('job_posted_month_no').size()
-	
+
 	# Calculate the percentage for each skill
 	df_perc = df_pivot.div(df_totals / 100, axis=0)
 	df_perc = df_perc.reset_index()
@@ -201,7 +201,7 @@ for i, title in enumerate(job_titles):
 	ax.set_title(f'Probability of Data Skills Over Time in the US ({title})')
 	ax.set_xlabel('2023')
 	ax.set_ylabel('Probability of Job Skill (%)')
-	ax.set_ylim(0, 16)
+	ax.set_ylim(0, 80)
 	ax.legend(loc='center left', bbox_to_anchor=(1, 0.5))
 	ax.yaxis.set_major_formatter(PercentFormatter(decimals=0))
 
@@ -215,46 +215,51 @@ plt.show()
 ### Insights into Probabilities of Data Skills of Each Role Over Time in the US
 
 #### Data Analyst
-- **Core Skills**:
-  - **SQL**: Consistently the most demanded skill, around 14%, essential for data querying and management.
-  - **Excel**: Steady demand, around 12%, crucial for data manipulation and analysis.
-  - **Python**: Stable demand around 8%, important for data analysis and automation.
 
-- **Supplementary Skills**:
-  - **Tableau**: Around 7%, vital for data visualization and reporting.
-  - **SAS**: Around 6%, used for statistical analysis and data manipulation.
+**Core Skills**:
+- **SQL**: Consistently the most demanded skill, around 50%, essential for data querying and management.
+- **Excel**: Steady demand, around 40%, crucial for data manipulation and analysis.
+- **Python**: Stable demand around 25%, important for data analysis and automation.
+
+**Supplementary Skills**:
+- **Tableau**: Around 30%, vital for data visualization and reporting.
+- **SAS**: Around 20%, used for statistical analysis and data manipulation.
 
 #### Data Scientist
-- **Core Skills**:
-  - **Python**: Most demanded skill, around 14%, essential for data analysis, machine learning, and statistical modeling.
-  - **SQL**: Steady demand, around 12%, important for data querying and manipulation.
-  - **R**: Around 8%, critical for statistical analysis and data visualization.
 
-- **Supplementary Skills**:
-  - **SAS**: Around 5%, used for advanced statistical analysis.
-  - **Tableau**: Around 5%, valuable for data visualization.
+**Core Skills**:
+- **Python**: Most demanded skill, around 75%, essential for data analysis, machine learning, and statistical modeling.
+- **SQL**: Steady demand, around 50%, important for data querying and manipulation.
+- **R**: Around 40%, critical for statistical analysis and data visualization.
+
+**Supplementary Skills**:
+- **SAS**: Around 25%, used for advanced statistical analysis.
+- **Tableau**: Around 24%, valuable for data visualization.
 
 #### Data Engineer
-- **Core Skills**:
-  - **SQL**: Consistently the most demanded skill, around 10%, essential for database management and ETL processes.
-  - **Python**: Steady demand, around 8%, important for scripting and automation.
-  - **AWS**: Consistent demand around 6%, crucial for cloud-based data solutions.
 
-- **Supplementary Skills**:
-  - **Azure**: Around 5%, used for cloud services and data solutions.
-  - **Spark**: Around 4%, important for big data processing.
+**Core Skills**:
+- **SQL**: Consistently the most demanded skill, around 70%, essential for database management and ETL processes.
+- **Python**: Steady demand, around 65%, important for scripting and automation.
+- **AWS**: Consistent demand around 40%, crucial for cloud-based data solutions.
+
+**Supplementary Skills**:
+- **Azure**: Around 33%, used for cloud services and data solutions.
+- **Spark**: Around 30%, important for big data processing.
 
 #### Key Analysis
-***Shared Skills Across Roles***
+
+***Shared Skills Across Roles***:
 - **SQL**: Dominates across all three roles, essential for data querying, management, and manipulation.
 - **Python**: High demand in all roles, crucial for programming, data analysis, and automation.
 
-***Role-Specific Highlights***
+***Role-Specific Highlights***:
 - **Data Analysts**: Excel and Tableau are particularly important for data manipulation and visualization.
 - **Data Scientists**: R and SAS are significant for statistical analysis and advanced data modeling.
 - **Data Engineers**: AWS, Azure, and Spark are key for cloud computing and big data processing.
 
 ### Summary
+
 Focusing on mastering SQL and Python provides a robust foundation for career stability and adaptability across Data Analyst, Data Scientist, and Data Engineer roles. Additionally, gaining proficiency in role-specific skills enhances job prospects and versatility in the dynamic field of data science and engineering.
 
 ## 3. How well do jobs and skills pay for data roles?
