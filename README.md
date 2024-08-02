@@ -1,7 +1,31 @@
-# The Analysis
-## 1. What are the most demanded skills for the top non-Senior level data roles in the US?
 
-To identify the most in-demand skills for popular non-Senior level data-related roles, I filtered out the most popular positions and determined the top 5 skills for each. This analysis highlights the key job titles and their essential skills, helping me focus on the relevant skills for my targeted role.
+# Analysis of the Data Job Market
+
+## Overview
+This project aims to analyze the landscape of data-related roles and skills in the United States. By examining job postings, median salaries, and demand for various skills, this analysis provides valuable insights for individuals seeking to enter or advance in the data industry.
+
+### Research Questions
+1. What are the most in-demand skills for entry-level data roles?
+2. How are in-demand skills trending for the top 3 entry level data roles?
+3. How well do jobs and skills pay for data roles?
+4. What is the most optimal skill(s) to learn for entry level data roles?
+
+## Tools I Used
+- **Python**: For data manipulation, analysis, and visualization.
+- **Pandas**: For data cleaning and data frame operations.
+- **Matplotlib and Seaborn**: For creating visualizations.
+- **Jupyter Notebook**: For interactive data analysis.
+- **Visual Studio Code**: For executing Python scripts.
+- **Git & Github**: For version control and sharing
+
+To view the initial data exploration, click here:
+[1_EDA_intro](Python_Data_Project/3_Project/1_EDA_intro.ipynb)
+
+---
+# The Analysis
+## 1. What are the most in-demand skills for entry-level data roles?
+
+To identify the most in-demand skills for popular entry level data-related roles, I filtered out the most popular positions and determined the top 5 skills for each. This analysis highlights the key job titles and their essential skills, helping me focus on the relevant skills for my targeted role.
 
 
 To view my notebook with detailed steps, click here: [2_Skills_Demand.ipynb](Python_Data_Project/3_Project/2_Skills_Demand.ipynb)
@@ -31,9 +55,11 @@ plt.show()
 ```
 
 ![Visualization of Likelihood of Top Skills for Data Roles](Python_Data_Project/Images/data_skills_percent.png)
-*Bar graphs showing the percentages of top 5 skills for the top most common data roles in the US*
+<br>*Bar graphs showing the percentages of top 5 skills for the top most common data roles in the US*
 
-### Insights
+### Insights into Probabilities of Top Skills appearing in Job Posts for Entry Level Data Roles
+
+#### Key Observations:
 
 1. **SQL**:
    - **High Demand Across All Roles**: SQL is a critical skill for all positions, with the highest demand in Data Engineer (68%) and Data Analyst (51%). Even roles like Business Analyst (48%) and Cloud Engineer (32%) show a significant need.
@@ -64,18 +90,19 @@ plt.show()
    - **Java**: Necessary for Software Engineer (21%).
    - **TensorFlow and PyTorch**: Key for Machine Learning Engineer (29% and 28%, respectively).
 
-### Summary
+#### Key Analysis:
 - **Core Skills**: SQL and Python are the most universally demanded skills across multiple roles.
 - **Role-Specific Skills**:
   - **Business and Analytical Roles**: Emphasize Excel and Tableau.
   - **Technical and Engineering Roles**: Focus on AWS, Azure, Spark, and specific programming frameworks like TensorFlow and PyTorch.
 - **Visualization Tools**: Tableau is essential for roles that require data presentation.
 
+### Summary
 By mastering these common and role-specific skills, individuals can enhance their job security and versatility in the job market. The overlap of critical skills like SQL and Python across multiple roles ensures that professionals remain competitive and adaptable, while proficiency in specialized tools like Excel, Tableau, and AWS can provide an edge in specific positions. This comprehensive skill set not only prepares individuals for a variety of data job titles but also offers greater stability and growth opportunities in their careers.
 
 ---
 
-## 2. How are in-demand skills trending for Top 3 Data-Related Jobs?
+## 2. How are in-demand skills trending for the top 3 entry level data roles?
 
 To identify trends in data-specific roles, I analyzed the top three in-demand positions and pinpointed the top five skills for each. I then plotted the monthly percentage of job listings requiring these skills. This analysis highlights the consistency of these top skills across the industry, underscoring their importance for robust career stability and adaptability in various roles.
 
@@ -100,9 +127,10 @@ ax.yaxis.set_major_formatter(PercentFormatter(decimals=0))
 ```
 
 ![Visualization of Probability of Skills Trending Over Time in 2023](Python_Data_Project/Images/skills_trend_percent.png)
-*Line graph showing overall the probability of each of the top skills appearing in job posts on month-to-month basis*
+<br>*Line graph showing overall the probability of each of the top skills appearing in job posts on month-to-month basis*
 
-### Insights
+### Insights for Probabilities of Data Skills Trending for All Entry-Level Data Roles
+#### Key Observations:
 
 1. **SQL Dominance**:
    - **Consistent High Demand**: SQL remains the most demanded skill throughout the year, maintaining a probability around 55%.
@@ -124,11 +152,12 @@ ax.yaxis.set_major_formatter(PercentFormatter(decimals=0))
    - **Low but Steady Demand**: Excel's probability stays consistently around 20%, indicating its steady presence in data roles.
    - **Key Insight**: Excel continues to be a fundamental skill, particularly for data manipulation and reporting tasks.
 
-### Summary
+#### Key Analysis:
 - **Core Skills**: SQL and Python are consistently in high demand, reinforcing their importance across various data roles.
 - **Supplementary Skills**: R, Tableau, and Excel, while not as dominant, remain valuable and contribute to a well-rounded skill set.
 - **Stability and Fluctuation**: The demand for these skills shows overall stability with minor fluctuations, suggesting steady job security for professionals proficient in these areas.
 
+### Summary
 This chart highlights the importance of focusing on SQL and Python for robust career stability, while also acquiring skills in R, Tableau, and Excel to enhance job prospects and adaptability.
 
 ### Data Visualization and Results cont'd
@@ -181,9 +210,9 @@ plt.show()
 ```
 
 ![Visulization of Each Role's Highest In-Demand Skills Listed Over Time](Python_Data_Project/Images/skills_trend_extended.png)
-*Seperate line graphs of each of the top Data Jobs showing the probabilities of the top 5 skills appearing in job posts month by month*
+<br>*Separate line graphs of each of the top Data Jobs showing the probabilities of the top 5 skills appearing in job posts month by month*
 
-### Insights
+### Insights into Probabilities of Data Skills of Each Role Over Time in the US
 
 #### Data Analyst
 - **Core Skills**:
@@ -215,12 +244,12 @@ plt.show()
   - **Azure**: Around 5%, used for cloud services and data solutions.
   - **Spark**: Around 4%, important for big data processing.
 
-### Key Analysis
-#### Shared Skills Across Roles
+#### Key Analysis
+***Shared Skills Across Roles***
 - **SQL**: Dominates across all three roles, essential for data querying, management, and manipulation.
 - **Python**: High demand in all roles, crucial for programming, data analysis, and automation.
 
-#### Role-Specific Highlights
+***Role-Specific Highlights***
 - **Data Analysts**: Excel and Tableau are particularly important for data manipulation and visualization.
 - **Data Scientists**: R and SAS are significant for statistical analysis and advanced data modeling.
 - **Data Engineers**: AWS, Azure, and Spark are key for cloud computing and big data processing.
@@ -248,9 +277,9 @@ plt.gca().xaxis.set_major_formatter(plt.FuncFormatter(lambda x, pos: f'{int(x/10
 plt.show()
 ```
 ![Visualization of Median Salaries for Top 6 Data Roles in the US](Python_Data_Project/Images/salary_analysis.png)
-*Boxplots visualizing the median salaries for each of the Top 6 highest in-demand data roles in the US*
+<br>*Boxplots visualizing the median salaries for each of the Top 6 highest in-demand data roles in the US*
 
-### Insights
+### Insights into Distributions of Average Yearly Salary for Data Roles in the US
 
 The chart presents the distribution of average yearly salaries for various data jobs in the US, including both senior and non-senior roles.
 
@@ -280,7 +309,7 @@ The chart presents the distribution of average yearly salaries for various data 
    - **Salary Range**: The lowest among the roles, generally between $50k and $90k.
    - **Outliers**: Some salaries exceed $100k, showing potential for growth and specialization.
 
-### Key Analysis:
+#### Key Analysis:
 
 1. **Career Growth and Salary Progression**:
    - There is a clear progression in salary from non-senior to senior roles across all job titles. 
@@ -340,9 +369,9 @@ plt.show()
 ```
 
 ![Visualization of Skills with the Highest Median Salaries And Highest Demand](Python_Data_Project/Images/skills_demand_salary.png)
-*Bar charts showing the top highest paid technical skills (top) as well as the top most requested skills in job postings (bottom) in the US across Data Analysts, Data Scientists and Data Engineers*
+<br>*Bar charts showing the top highest paid technical skills (top) as well as the top most requested skills in job postings (bottom) in the US across Data Analysts, Data Scientists and Data Engineers*
 
-### Insights
+### Insights into Top Median Salaries and Demand for Entry-Level Data Roles
 
 #### Key Observations:
 
@@ -372,7 +401,7 @@ plt.show()
 9. **Power BI**: Popular for business analytics and data visualization.
 10. **Excel**: Still relevant and widely used for data analysis.
 
-### Key Analysis:
+#### Key Analysis:
 
 1. **Salary vs. Demand**:
    - While some skills like MongoDB and Unreal Engine offer the highest median salaries, they are not listed among the most in-demand skills.
@@ -393,3 +422,128 @@ plt.show()
 ### Summary:
 
 For entry-level data professionals, a strategic blend of in-demand and high-paying skills can pave the way for robust career growth and lucrative opportunities. Balancing foundational skills like Python, SQL, and Excel with specialized expertise in areas like cloud computing, big data, and blockchain technology can provide a competitive edge in the dynamic job market. This approach not only ensures job security but also offers the potential for substantial salary advancements as professionals transition into more advanced data roles.
+
+## 4. What is the most optimal skill(s) to learn for data roles?
+
+To identify the most optimal skills to learn in the data industry, I focused on job postings in the United States and analyzed their demand and associated salaries. Initially, I examined the prevalence and salary distributions of key data skills, such as Python, SQL, and Spark, to understand which skills are both highly sought after and financially rewarding. By evaluating the percentage of job postings and median salaries for each skill, I was able to pinpoint the skills that offer the best balance of demand and lucrative compensation.
+
+To view the notebook for more details, click here:
+[5_Optimal_Skills](Python_Data_Project/3_Project/5_Optimal_Skills.ipynb)
+
+### Data Visualization and Results:
+```python
+from adjustText import adjust_text
+from matplotlib.ticker import PercentFormatter
+
+sns.scatterplot(data=df_tech_skills, x='skill_percent', y='Median Salary', hue='technology')
+
+sns.despine()
+sns.set_theme(style='ticks')
+
+# Prepare texts for adjustText
+texts = []
+for i, txt in enumerate(df_tech_skills['skills']):
+    texts.append(plt.text(df_tech_skills['skill_percent'].iloc[i], df_tech_skills['Median Salary'].iloc[i], txt))
+
+# Adjust text to avoid overlap
+adjust_text(texts, arrowprops=dict(arrowstyle='->', color='gray'))
+
+# Set axis labels, title, and legend
+plt.xlabel('Percentage of Job Postings')
+plt.ylabel('Median Yearly Salary')
+plt.title(f'Salary vs. Percent of Job Postings for Top 12 Skills across Entry Level Data Roles in the US')
+
+ax = plt.gca()
+ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda y, loc: "${:,}".format(int(y/1000))))
+ax.xaxis.set_major_formatter(PercentFormatter(decimals=0))
+
+# Adjust layout and display plot 
+plt.tight_layout()
+plt.show()
+```
+![Visualization of Median Salary vs Percent of Job Postings for Data Skills](Python_Data_Project/Images/optimal_skills.png)
+<br>*Scatterplot of Median Salary vs Percent of Job Postings for Data Skills Categorized by Technology Groups*
+
+### Insights into Median Salary vs Demand for Data Skills
+
+#### Key Observations:
+
+1. **High Salary, Moderate Demand**:
+   - **Spark (Libraries)**: Commands a high median yearly salary (approx. $135K) but is in moderate demand (~15% of job postings).
+   - **AWS (Cloud)**: Also offers a high salary (around $130K) with slightly higher demand (~18%).
+   - **Snowflake (Cloud)** and **Java (Programming)**: Both offer strong salaries (around $125K) and moderate demand (15-20% of job postings).
+
+2. **High Salary, Low Demand**:
+   - **Azure (Cloud)**: High salary (approx. $120K) with demand at around 12%.
+   - **R (Programming)**: Similarly positioned with a high salary (~$120K) and moderate demand (~30%).
+
+3. **Moderate Salary, High Demand**:
+   - **Python (Programming)** and **SQL (Programming)**: Both have a moderate salary (~$120K) but are in high demand, especially SQL (approx. 50% of job postings) and Python (45%).
+
+4. **Low Salary, Moderate Demand**:
+   - **Excel (Analyst Tools)** and **Power BI (Analyst Tools)**: Lower salaries (~$95K-$100K) but have moderate demand (~20-25% of job postings).
+   - **Tableau (Analyst Tools)** and **SAS (Libraries)**: Slightly higher salaries (~$110K) with moderate demand (~25-30%).
+
+#### Key Analysis:
+
+**Strategic Skill Development for Career Advancement**:
+
+1. **Leverage High-Demand Skills**:
+   - **SQL and Python**: Given their high demand and decent salary range, mastering these programming skills is essential for entering and advancing in data roles. These skills are foundational and widely applicable across various data roles.
+
+2. **Target High Salary Skills for Specialization**:
+   - **Spark (Libraries)** and **AWS (Cloud)**: Specializing in these high-paying skills can significantly enhance earning potential. Their relatively moderate demand indicates a niche market with lucrative opportunities.
+   - **Snowflake (Cloud)**: Emerging as a valuable skill for data warehousing and analytics, offering substantial salaries.
+
+3. **Broaden Expertise in Cloud Technologies**:
+   - **AWS, Azure, Snowflake**: With cloud computing becoming increasingly critical, proficiency in these platforms is highly beneficial. They offer strong salaries and are integral to modern data infrastructure.
+
+4. **Maintain Versatility with Analyst Tools**:
+   - **Tableau, Power BI, Excel**: These tools are essential for data visualization and business intelligence. They may offer lower salaries but are crucial for data-driven decision-making and presenting insights.
+
+**Career Path Recommendations for Data Analysts**:
+
+1. **Transition to Data Engineer or Scientist Roles**:
+   - **From Data Analyst to Data Engineer**: Acquiring skills in cloud technologies (AWS, Azure) and big data frameworks (Spark) can facilitate this transition. These skills are in demand and offer higher salaries compared to a senior data analyst role.
+   - **From Data Analyst to Data Scientist**: Enhancing skills in programming (Python, R) and machine learning frameworks (such as Snowflake for data processing) can open up opportunities in data science, which typically offers higher salaries and more advanced analytical work.
+
+2. **Advanced Skill Development**:
+   - **For Data Analysts**: Strengthening programming skills (Python, SQL) and gaining proficiency in high-demand tools (Tableau, SAS) can provide a solid foundation for career advancement.
+   - **For Senior Data Analysts**: Focusing on niche skills like Spark and AWS can significantly enhance earning potential and job prospects in more specialized and advanced data roles.
+
+### Summary:
+
+Mastering a strategic combination of high-demand and high-paying skills, such as those in programming, cloud technologies, libraries, and analyst tools, can significantly enhance career prospects and earning potential for data professionals. Focusing on foundational skills like SQL and Python, while also investing in advanced skills in cloud technologies and big data frameworks, can provide a competitive edge and open up opportunities for career advancement into more specialized and higher-paying data roles.
+
+---
+# Overall Insights
+
+The analysis of the data job market reveals several critical insights for aspiring and current data professionals:
+
+1. **High-Demand Programming Skills**:
+   - **SQL and Python**: These skills offer moderate salaries but are foundational and widely applicable, making them essential for career advancement.
+
+2. **Specialization in High-Paying Skills**:
+   - **Spark, AWS, and Snowflake**: Specializing in these skills can significantly enhance earning potential and open up niche opportunities due to their high pay and moderate demand.
+
+3. **Importance of Cloud Technologies**:
+   - **AWS and Azure**: These technologies are increasingly vital in the data field, offering substantial salaries and crucial roles in modern data infrastructure.
+
+4. **Versatility with Analyst Tools**:
+   - **Tableau and Power BI**: While these tools offer lower salaries, they remain essential for data visualization and business intelligence.
+
+5. **Career Transition Opportunities**:
+   - **From Data Analyst to Data Scientist or Data Engineer**: Acquiring skills in programming, cloud technologies, and big data frameworks can facilitate these transitions, providing clear pathways for career growth and increased earning potential. 
+
+By focusing on a strategic combination of high-demand, high-paying skills and foundational knowledge, data professionals can enhance their career prospects and achieve significant advancements in their roles.
+
+---
+# What I Learned
+Throughout this project, I gained a deeper understanding of the data job market. Key takeaways include:
+- The importance of specific programming languages and tools in the industry.
+- How demand for certain skills can significantly influence salary.
+- The evolving nature of the job market and how it affects career planning.
+
+---
+# Conclusion
+This project highlights the critical skills and trends in the data job market. By understanding which skills are in demand and offer high salaries, data professionals can make informed decisions about their career paths. This analysis serves as a valuable resource for anyone looking to enter or advance in the data industry, providing clear guidance on which skills to prioritize for career success.
